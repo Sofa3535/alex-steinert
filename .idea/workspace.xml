@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="172c9a0d-0dbe-4918-8b5b-7e45b256bce4" name="Default Changelist" comment="Get 3 index pages set up as well as screw with getting webpack setup">
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/app/Http/Controllers/ProjectsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/gulpfile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/public/css/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/public/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/public/mix-manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/resources/js/MMM-Discord.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/resources/js/blackjack.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/resources/views/projects.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/resources/views/projects/blackjack.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/routes/projects.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/website/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/website/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/website/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/website/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/website/routes/web.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/website/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="init_setup" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="127.0.0.1" id="227e1d5c-631f-4f4b-8994-44161b6be2eb" name="127.0.0.1" port="8000" />
+    </servers>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
+    <include_path>
+      <path value="$PROJECT_DIR$/website/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/website/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/website/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/website/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/website/vendor/dnoegel/php-xdg-base-dir" />
+      <path value="$PROJECT_DIR$/website/vendor/scrivo/highlight.php" />
+      <path value="$PROJECT_DIR$/website/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/website/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/website/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/website/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/website/vendor/laravel/framework" />
+      <path value="$PROJECT_DIR$/website/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/website/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/website/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/website/vendor/fideloper/proxy" />
+      <path value="$PROJECT_DIR$/website/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/website/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/website/vendor/composer" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-iconv" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/website/vendor/phar-io/version" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/website/vendor/phar-io/manifest" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-php72" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/css-selector" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/website/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/website/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/website/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/website/vendor/nunomaduro/collision" />
+      <path value="$PROJECT_DIR$/website/vendor/filp/whoops" />
+      <path value="$PROJECT_DIR$/website/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/website/vendor/mockery/mockery" />
+      <path value="$PROJECT_DIR$/website/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/website/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/website/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/website/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/website/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/website/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/website/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/website/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/website/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/website/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/version" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/resource-operations" />
+      <path value="$PROJECT_DIR$/website/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/recursion-context" />
+      <path value="$PROJECT_DIR$/website/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/object-reflector" />
+      <path value="$PROJECT_DIR$/website/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/object-enumerator" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/lines-of-code" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/global-state" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/exporter" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/complexity" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/comparator" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/code-unit" />
+      <path value="$PROJECT_DIR$/website/vendor/sebastian/cli-parser" />
+      <path value="$PROJECT_DIR$/website/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/website/vendor/asm89/stack-cors" />
+      <path value="$PROJECT_DIR$/website/vendor/swiftmailer/swiftmailer" />
+      <path value="$PROJECT_DIR$/website/vendor/psy/psysh" />
+      <path value="$PROJECT_DIR$/website/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/website/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/website/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/website/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/website/vendor/phpunit/php-invoker" />
+      <path value="$PROJECT_DIR$/website/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/website/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/website/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/website/vendor/ramsey/uuid" />
+      <path value="$PROJECT_DIR$/website/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/website/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/website/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/website/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/website/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/website/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/website/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/website/vendor/fruitcake/laravel-cors" />
+      <path value="$PROJECT_DIR$/website/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/website/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/website/vendor/tijsverkoyen/css-to-inline-styles" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1izpGgFWKlX0ibnXndwLoWWLKy2" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Code\alexsteinert\website\storage\app" />
+      <recent name="D:\Code\alexsteinert\website\public" />
+      <recent name="D:\Code\alexsteinert\website\storage\app\welcome_gifs" />
+      <recent name="D:\Code\alexsteinert\website\resources\views\index" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="172c9a0d-0dbe-4918-8b5b-7e45b256bce4" name="Default Changelist" comment="" />
+      <created>1602920180529</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602920180529</updated>
+      <workItem from="1602920185349" duration="11000" />
+      <workItem from="1602920497416" duration="1031000" />
+      <workItem from="1602921653655" duration="1370000" />
+      <workItem from="1602951417365" duration="857000" />
+      <workItem from="1602956595242" duration="4484000" />
+      <workItem from="1602967251134" duration="3155000" />
+      <workItem from="1602979047992" duration="5095000" />
+      <workItem from="1602987017522" duration="7312000" />
+      <workItem from="1603146356843" duration="2299000" />
+      <workItem from="1603148973130" duration="1465000" />
+      <workItem from="1603155715092" duration="4995000" />
+      <workItem from="1603241967168" duration="4741000" />
+      <workItem from="1603493901620" duration="620000" />
+      <workItem from="1620582900058" duration="611000" />
+      <workItem from="1620588786466" duration="2307000" />
+      <workItem from="1620789478895" duration="592000" />
+      <workItem from="1620856115182" duration="4857000" />
+      <workItem from="1621486971795" duration="73000" />
+      <workItem from="1621488994184" duration="223000" />
+      <workItem from="1624202032334" duration="4748000" />
+      <workItem from="1624221996455" duration="3512000" />
+      <workItem from="1624234920893" duration="5434000" />
+      <workItem from="1624247946634" duration="988000" />
+    </task>
+    <task id="LOCAL-00001" summary="Get laravel setup">
+      <created>1602922320857</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1602922320857</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Get 3 index pages set up as well as screw with getting webpack setup">
+      <created>1602959099142</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602959099142</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Set up db and drivers. Create Music model. Get projects page to look a tiny bit better.">
+      <created>1603160691608</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1603160691608</updated>
+    </task>
+    <task id="LOCAL-00004" summary="remove vendor files from .gitignore">
+      <created>1603242314558</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1603242314558</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add vendor files to repo">
+      <created>1603242484587</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1603242484587</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add vendor files to repo">
+      <created>1603242515721</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1603242515721</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Get laravel setup" />
+    <MESSAGE value="Get 3 index pages set up as well as screw with getting webpack setup" />
+    <MESSAGE value="Set up db and drivers. Create Music model. Get projects page to look a tiny bit better." />
+    <MESSAGE value="remove vendor files from .gitignore" />
+    <MESSAGE value="Add vendor files to repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add vendor files to repo" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="987" y="299" width="585" height="801" key="find.popup" timestamp="1624248006983">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="987" y="299" width="585" height="801" key="find.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1624248006983" />
+    <state x="936" y="330" key="run.anything.popup" timestamp="1624236282719">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="936" y="330" key="run.anything.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1624236282719" />
+    <state x="941" y="314" width="672" height="678" key="search.everywhere.popup" timestamp="1624248024833">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="941" y="314" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@0.0.2560.1400" timestamp="1624248024833" />
+    <state x="3267" y="234" width="672" height="504" key="search.everywhere.popup/0.0.2560.1400/2560.0.1920.1040@2560.0.1920.1040" timestamp="1620860950888" />
+  </component>
+</project>
