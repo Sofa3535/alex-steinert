@@ -16,8 +16,10 @@ class ProjectsController extends BaseController
         return view('projects');
     }
 
-    public function blackJack()
+    public function movies()
     {
-        return view('projects.blackjack');
+
+
+        return view('projects.movies');
     }
 }

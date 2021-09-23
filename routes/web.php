@@ -22,3 +22,7 @@ Route::get('projects', [
     'as' => 'projects',
     'uses' => ProjectsController::class.'@index', /** see ProjectsController::index() */
 ]);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
