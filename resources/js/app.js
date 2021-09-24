@@ -1,3 +1,6 @@
+import VueResource from 'vue-resource';
+
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -7,6 +10,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+
+Vue.use(VueResource);
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +24,7 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('movie-finder', require('./components/MovieFinder.vue').default);
+Vue.component('movie-finder-app', require('./Vue/MovieFinder/MovieFinderApp.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,5 +33,5 @@ Vue.component('movie-finder', require('./components/MovieFinder.vue').default);
  */
 
 const app = new Vue({
-    el: '#movie-finder',
+    el: '#movie-finder-app',
 });
