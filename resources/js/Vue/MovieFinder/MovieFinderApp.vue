@@ -66,7 +66,7 @@ export default {
             let time = this.details.runtime
             let hours = Math.trunc(time/60);
             let minutes = time % 60;
-            return hours +" hrs "+ minutes + ' minute' + (minutes === 1 ? '' : 's');
+            return hours + ' hr' + (hours === 1 ? '' : 's ') + minutes + ' minute' + (minutes === 1 ? '' : 's');
         },
     },
     mounted() {
