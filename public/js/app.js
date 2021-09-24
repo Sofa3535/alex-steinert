@@ -1871,7 +1871,7 @@ __webpack_require__.r(__webpack_exports__);
       var time = this.details.runtime;
       var hours = Math.trunc(time / 60);
       var minutes = time % 60;
-      return hours + " hrs " + minutes + ' minute' + (minutes === 1 ? '' : 's');
+      return hours + ' hr' + (hours === 1 ? ' ' : 's ') + minutes + ' minute' + (minutes === 1 ? '' : 's');
     }
   },
   mounted: function mounted() {}
