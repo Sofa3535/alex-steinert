@@ -33,14 +33,27 @@ class ProjectsController extends BaseController
     public function getMoviesApi()
     {
         $movie = \Request::get('movie');
+
+        // Call to search for the movie
         $movieSearchResp = \Http::get('https://api.themoviedb.org/3/search/movie?api_key='
             .env('MOVIEDB_API_KEY').'&language=en-US&query='.$movie.'&page=1&include_adult=false')
-        ->json()['results'][0];
+        ->json()['results'];
 
+        if (empty($movieSearchResp)) {
+            return \response()->json([
+                'status' => 'no-results',
+            ]);
+        }
+
+        // Only need to grab the first result
+        $movieSearchResp = $movieSearchResp[0];
+
+        // Call to grab movie details
         $movieDetails = \Http::get('https://api.themoviedb.org/3/movie/'.$movieSearchResp['id'].'?api_key='
             .env('MOVIEDB_API_KEY').'&language=en-US')
             ->json();
 
+        // Call to grab cast & crew
         $castSearchResp = \Http::get('https://api.themoviedb.org/3/movie/'.$movieSearchResp['id'].'/credits?api_key='
                 .env('MOVIEDB_API_KEY').'&language=en-US')
             ->json();

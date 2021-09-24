@@ -1831,6 +1831,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -1841,40 +1853,53 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       movieSearch: '',
-      movieFound: {},
+      movie: '',
+      movieResult: {},
       details: {},
-      cast: {}
+      cast: {},
+      status: ''
     };
   },
   methods: {
     searchMovie: function searchMovie() {
       var _this = this;
 
+      $('#search-btn').prop('disabled', true);
       this.$http.get(this.routes.getMovies, {
         params: {
           movie: this.movieSearch
         }
       }).then(function (response) {
-        _this.movieFound = response.data.movie;
-        _this.details = response.data.details; // Only show the first 10 cast members
+        if (response.data.status === 'success') {
+          _this.movieResult = response.data.movie;
+          _this.details = response.data.details; // Only show the first 10 cast members
 
-        _this.cast = response.data.cast.cast.slice(0, 10);
-      })["catch"]()["finally"](function () {});
+          _this.cast = response.data.cast.cast.slice(0, 10);
+        }
+
+        _this.status = response.data.status;
+      })["catch"](function (e) {
+        _this.status = 'error';
+      })["finally"](function () {
+        $('#search-btn').prop('disabled', false);
+        _this.movie = _this.movieSearch;
+      });
     }
   },
   computed: {
+    // Turns boring date (09-24-2021) into fun date (Sept. 24, 2021)
     dateConversion: function dateConversion() {
-      var date = this.movieFound.release_date;
+      var date = this.movieResult.release_date;
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(date).format('MMM. D, YYYY');
     },
+    // Turns minutes into hours & minutes
     timeConversion: function timeConversion() {
       var time = this.details.runtime;
       var hours = Math.trunc(time / 60);
       var minutes = time % 60;
       return hours + ' hr' + (hours === 1 ? ' ' : 's ') + minutes + ' minute' + (minutes === 1 ? '' : 's');
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -58883,11 +58908,7 @@ var render = function() {
             expression: "movieSearch"
           }
         ],
-        attrs: {
-          id: "search",
-          type: "text",
-          placeholder: "Try 'Avengers: Endgame'"
-        },
+        attrs: { id: "search", type: "text", placeholder: "Try 'Avengers'" },
         domProps: { value: _vm.movieSearch },
         on: {
           input: function($event) {
@@ -58899,44 +58920,67 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("button", { on: { click: _vm.searchMovie } }, [_vm._v("Search!")])
+      _c(
+        "button",
+        { attrs: { id: "search-btn" }, on: { click: _vm.searchMovie } },
+        [_vm._v("Search!")]
+      )
     ]),
     _vm._v(" "),
-    _c("div", { attrs: { id: "movie-result" } }, [
-      _c("h3", [_vm._v(_vm._s(this.movieFound.title))]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(this.movieFound.overview))]),
-      _vm._v(" "),
-      this.movieFound.release_date
-        ? _c("p", [_vm._v("Released: " + _vm._s(this.dateConversion))])
-        : _vm._e(),
-      _vm._v(" "),
-      this.details.runtime
-        ? _c("p", [
-            _vm._v(
-              "Runtime: " +
-                _vm._s(this.details.runtime) +
-                " minutes (" +
-                _vm._s(this.timeConversion) +
-                ")"
-            )
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _vm.cast
-      ? _c("div", { attrs: { id: "cast" } }, [
-          _c(
-            "ul",
-            _vm._l(_vm.cast, function(member) {
-              return _c("li", [
-                _vm._v(
-                  _vm._s(member.character) + " (" + _vm._s(member.name) + ")"
+    this.status === "success"
+      ? _c("div", { attrs: { id: "movie-result-success" } }, [
+          _c("div", { attrs: { id: "details" } }, [
+            _c("h3", [_vm._v(_vm._s(this.movieResult.title))]),
+            _vm._v(" "),
+            _c("p", [_vm._v(_vm._s(this.movieResult.overview))]),
+            _vm._v(" "),
+            this.movieResult.release_date
+              ? _c("p", [_vm._v("Released: " + _vm._s(this.dateConversion))])
+              : _vm._e(),
+            _vm._v(" "),
+            this.details.runtime
+              ? _c("p", [
+                  _vm._v(
+                    "Runtime: " +
+                      _vm._s(this.details.runtime) +
+                      " minutes (" +
+                      _vm._s(this.timeConversion) +
+                      ")"
+                  )
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
+          _vm.cast && _vm.cast.length > 0
+            ? _c("div", { attrs: { id: "cast" } }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.cast, function(member) {
+                    return _c("li", [
+                      _vm._v(
+                        _vm._s(member.character) +
+                          " (" +
+                          _vm._s(member.name) +
+                          ")"
+                      )
+                    ])
+                  }),
+                  0
                 )
               ])
-            }),
-            0
-          )
+            : _c("div", [_vm._v("There are no cast members")])
+        ])
+      : this.status === "no-results"
+      ? _c("div", { attrs: { id: "no-results" } }, [
+          _c("p", [
+            _vm._v("No results found for  "),
+            _c("strong", [_vm._v(_vm._s(this.movie))]),
+            _vm._v(". Try checking your spelling.")
+          ])
+        ])
+      : this.status === "error"
+      ? _c("div", { attrs: { id: "error" } }, [
+          _c("p", [_vm._v("There was an error. Try again or wait.")])
         ])
       : _vm._e()
   ])

@@ -24,6 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="172c9a0d-0dbe-4918-8b5b-7e45b256bce4" name="Default Changelist" comment="Get 3 index pages set up as well as screw with getting webpack setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Vue/MovieFinder/MovieFinderApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Vue/MovieFinder/MovieFinderApp.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,10 +59,22 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpDebugGeneral" xdebug_debug_port="9005" listening_started="true" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false">
+    <xdebug_debug_ports port="9005" />
+  </component>
   <component name="PhpServers">
     <servers>
       <server host="127.0.0.1" id="227e1d5c-631f-4f4b-8994-44161b6be2eb" name="127.0.0.1" port="8000" />
+      <server id="4684871b-a075-4f44-9a13-99050429c88a" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
+        </path_mappings>
+      </server>
+      <server host="" id="2c312c35-4afc-4045-8f85-23601bac0395" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
+        </path_mappings>
+      </server>
     </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.0">
@@ -190,7 +204,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -241,7 +255,10 @@
       <workItem from="1632429479228" duration="2173000" />
       <workItem from="1632433924174" duration="63000" />
       <workItem from="1632434107284" duration="1230000" />
-      <workItem from="1632435451407" duration="15385000" />
+      <workItem from="1632435451407" duration="16061000" />
+      <workItem from="1632502228543" duration="615000" />
+      <workItem from="1632511462001" duration="1666000" />
+      <workItem from="1632518673559" duration="1990000" />
     </task>
     <task id="LOCAL-00001" summary="Get laravel setup">
       <created>1602922320857</created>
@@ -311,5 +328,12 @@
     <MESSAGE value="remove vendor files from .gitignore" />
     <MESSAGE value="Add vendor files to repo" />
     <option name="LAST_COMMIT_MESSAGE" value="Add vendor files to repo" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="server.php">
+        <watch expression="\Http::get('https://api.themoviedb.org/3/search/movie?api_key='.env('MOVIEDB_API_KEY').'&amp;language=en-US&amp;query='.$movie.'&amp;page=1&amp;include_adult=false')-&gt;json()['results']" language="PHP" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

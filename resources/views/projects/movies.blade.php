@@ -1,5 +1,5 @@
 
-<h1>Find your Movie</h1>
+<h1>Find A Movie</h1>
 <div id="movie-finder-app">
     <movie-finder-app
         :routes='{!! json_encode($routes) !!}'
