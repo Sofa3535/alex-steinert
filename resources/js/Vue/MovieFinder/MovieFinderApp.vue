@@ -47,7 +47,6 @@ export default {
         searchMovie() {
             this.$http.get(this.routes.getMovies, { params:  { movie: this.movieSearch }})
                 .then((response) => {
-                    console.log(response)
                     this.movieFound = response.data.movie
                     this.details = response.data.details
                     // Only show the first 10 cast members
