@@ -33,11 +33,11 @@ import moment from 'moment'
 
 export default {
     props: {
-        movieSearch: { required: false },
         routes: { required: true },
     },
     data() {
         return {
+            movieSearch: '',
             movieFound: {},
             details: {},
             cast: {},
