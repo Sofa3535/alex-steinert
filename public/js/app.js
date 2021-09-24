@@ -1857,7 +1857,6 @@ __webpack_require__.r(__webpack_exports__);
           movie: this.movieSearch
         }
       }).then(function (response) {
-        console.log(response);
         _this.movieFound = response.data.movie;
         _this.details = response.data.details; // Only show the first 10 cast members
 
