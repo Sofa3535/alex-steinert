@@ -1,5 +1,5 @@
 import VueResource from 'vue-resource';
-
+import 'bootstrap/dist/css/bootstrap.css';
 
 /**
  * First we will load all of this project's JavaScript dependencies which

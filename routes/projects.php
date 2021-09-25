@@ -13,4 +13,9 @@ Route::group(['middleware' => 'web', 'prefix' => 'projects'], function () {
         'as' => 'projects.movies.getMoviesApi',
         'uses' => ProjectsController::class.'@getMoviesApi', /** see ProjectsController::getMoviesApi() */
     ]);
+
+    Route::get('movies/getRandomApi', [
+        'as' => 'projects.movies.getRandomApi',
+        'uses' => ProjectsController::class.'@feelingLuckyApi', /** see ProjectsController::feelingLuckyApi() */
+    ]);
 });

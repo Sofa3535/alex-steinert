@@ -21,7 +21,8 @@ class ProjectsController extends BaseController
     public function movies()
     {
         $routes = [
-            'getMovies' => route('projects.movies.getMoviesApi', [], false)
+            'getMovies' => route('projects.movies.getMoviesApi', [], false),
+            'feelingLucky' => route('projects.movies.getRandomApi', [], false)
         ];
 
         return view('projects.movies',[
@@ -48,22 +49,51 @@ class ProjectsController extends BaseController
         // Only need to grab the first result
         $movieSearchResp = $movieSearchResp[0];
 
+        [$movieDetails, $castSearchResp] = $this->getMovieDetailsApi($movieSearchResp['id']);
+
+        return \response()->json([
+            'status' => 'success',
+            'details' => $movieDetails,
+            'cast' => $castSearchResp
+        ]);
+    }
+
+    public function feelingLuckyApi()
+    {
+        // Get the latest movie inserted so I can tell how far up the ids go
+        $latestMovie = \Http::get('https://api.themoviedb.org/3/movie/latest?api_key='.env('MOVIEDB_API_KEY').'&language=en-US')
+            ->json();
+
+        // Grab the id
+        $latestId = $latestMovie['id'];
+
+
+        // Then find a random int (which will be our movie id). If the movie returns a 200 or is an adult movie,
+        // we need to try again with a new int
+        do {
+            $randomInt = rand(1, $latestId);
+            [$movieDetails, $castSearchResp] = $this->getMovieDetailsApi($randomInt);
+        } while ((isset($movieDetails['success']) && !$movieDetails['success']) || $movieDetails['adult']);
+
+        return \response()->json([
+            'status' => 'success',
+            'details' => $movieDetails,
+            'cast' => $castSearchResp
+        ]);
+    }
+
+    public function getMovieDetailsApi($movieId)
+    {
         // Call to grab movie details
-        $movieDetails = \Http::get('https://api.themoviedb.org/3/movie/'.$movieSearchResp['id'].'?api_key='
+        $movieDetails = \Http::get('https://api.themoviedb.org/3/movie/'.$movieId.'?api_key='
             .env('MOVIEDB_API_KEY').'&language=en-US')
             ->json();
 
         // Call to grab cast & crew
-        $castSearchResp = \Http::get('https://api.themoviedb.org/3/movie/'.$movieSearchResp['id'].'/credits?api_key='
-                .env('MOVIEDB_API_KEY').'&language=en-US')
+        $castSearchResp = \Http::get('https://api.themoviedb.org/3/movie/'.$movieId.'/credits?api_key='
+            .env('MOVIEDB_API_KEY').'&language=en-US')
             ->json();
 
-
-        return \response()->json([
-            'status' => 'success',
-            'movie' => $movieSearchResp,
-            'details' => $movieDetails,
-            'cast' => $castSearchResp
-        ]);
+        return [$movieDetails, $castSearchResp];
     }
 }

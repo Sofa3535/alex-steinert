@@ -2,7 +2,6 @@
 <div class="container">
     <div class="title">
         <span id="alex">Alex Steinert</span>
-        <span id="subtitle">The narcissism is crazy</span><br><br>
         <a href="{{route('projects')}}">Projects</a>
     {{--    <img src="https://alexsteinert.s3.ca-central-1.amazonaws.com/welcome/ezgif.com-gif-maker.gif">--}}
     </div>
