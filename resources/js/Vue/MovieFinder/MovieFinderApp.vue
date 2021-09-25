@@ -22,6 +22,11 @@
             >I'm Feeling Lucky!</button>
         </div><br>
 
+        <!--Handle nothing in search box-->
+        <div id="no-search" v-if="emptySearch">
+            <p>It might help to type something in first...</p>
+        </div>
+
         <!--Movie details and cast-->
         <div id="movie-result-success" v-if="this.status === 'success'">
             <div id="details">
@@ -39,7 +44,7 @@
                     <div v-for="member in cast" class="person-item">
                         <img v-if="member.profile_path" class="rounded-circle square center" :src="'https://image.tmdb.org/t/p/w200' + member.profile_path">
                         <img v-else class="rounded-circle square center" src="https://alexsteinert.s3.ca-central-1.amazonaws.com/welcome/java-2.jpg"><br><br>
-                        <p class="text-center">{{ member.character }}</p>
+                        <p class="text-center">{{ member.character !== "" ? member.character : 'N/a' }}</p>
                         <p class="text-center">({{ member.name }})</p>
                     </div>
                 </div>
@@ -57,6 +62,7 @@
             <p>There was an error. Try again or wait.</p>
         </div>
 
+
     </div>
 </template>
 
@@ -70,6 +76,7 @@ export default {
     data() {
         return {
             movieSearch: '',
+            emptySearch: false,
             movie: '',
             details: {},
             cast: {},
@@ -78,6 +85,11 @@ export default {
     },
     methods: {
         searchMovie() {
+            if (!this.movieSearch) {
+                this.emptySearch = true;
+                return;
+            }
+            this.emptySearch = false;
             $('.btn').prop('disabled', true);
             this.$http.get(this.routes.getMovies, { params:  { movie: this.movieSearch }})
                 .then((response) => {
@@ -97,6 +109,7 @@ export default {
                 })
         },
         feelingLucky() {
+            this.emptySearch = false;
             $('.btn').prop('disabled', true);
             this.$http.get(this.routes.feelingLucky)
                 .then((response) => {
@@ -159,6 +172,11 @@ export default {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.btn {
+    background-color: #6405eb;
+    color: white;
 }
 
 </style>
