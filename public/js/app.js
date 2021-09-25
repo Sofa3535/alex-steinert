@@ -1863,6 +1863,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -1873,6 +1879,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       movieSearch: '',
+      emptySearch: false,
       movie: '',
       details: {},
       cast: {},
@@ -1883,6 +1890,12 @@ __webpack_require__.r(__webpack_exports__);
     searchMovie: function searchMovie() {
       var _this = this;
 
+      if (!this.movieSearch) {
+        this.emptySearch = true;
+        return;
+      }
+
+      this.emptySearch = false;
       $('.btn').prop('disabled', true);
       this.$http.get(this.routes.getMovies, {
         params: {
@@ -1906,6 +1919,7 @@ __webpack_require__.r(__webpack_exports__);
     feelingLucky: function feelingLucky() {
       var _this2 = this;
 
+      this.emptySearch = false;
       $('.btn').prop('disabled', true);
       this.$http.get(this.routes.feelingLucky).then(function (response) {
         if (response.data.status === 'success') {
@@ -5912,7 +5926,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.person-container {\n    display: flex;\n    flex-flow: row wrap;\n    flex-direction: row;\n}\n.person-item {\n    width: 33%;\n    height: 33%;\n    padding: 5%;\n}\n.square {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width:230px;\n    height:230px;\n}\n.center {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.person-container {\n    display: flex;\n    flex-flow: row wrap;\n    flex-direction: row;\n}\n.person-item {\n    width: 33%;\n    height: 33%;\n    padding: 5%;\n}\n.square {\n    -o-object-fit: cover;\n       object-fit: cover;\n    width:230px;\n    height:230px;\n}\n.center {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n}\n.btn {\n    background-color: #6405eb;\n    color: white;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58860,6 +58874,12 @@ var render = function() {
     ]),
     _c("br"),
     _vm._v(" "),
+    _vm.emptySearch
+      ? _c("div", { attrs: { id: "no-search" } }, [
+          _c("p", [_vm._v("It might help to type something in first...")])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     this.status === "success"
       ? _c("div", { attrs: { id: "movie-result-success" } }, [
           _c("div", { attrs: { id: "details" } }, [
@@ -58939,7 +58959,11 @@ var render = function() {
                       _c("br"),
                       _vm._v(" "),
                       _c("p", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(member.character))
+                        _vm._v(
+                          _vm._s(
+                            member.character !== "" ? member.character : "N/a"
+                          )
+                        )
                       ]),
                       _vm._v(" "),
                       _c("p", { staticClass: "text-center" }, [
