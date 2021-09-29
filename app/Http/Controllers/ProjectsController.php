@@ -103,6 +103,44 @@ class ProjectsController extends BaseController
 
     public function getUserApi()
     {
+        $user = \Request::get('user');
+        $forkFilter = \Request::get('forked') === 'true' ? true : false;
 
+        $githubUser = \Http::get('https://api.github.com/users/' . $user)
+            ->json();
+        $publicRepos = \Http::get('https://api.github.com/users/' . $user .'/repos')
+            ->json();
+
+        $totalRepoCount = 0;
+        $stargazerCount = 0;
+        $forkCount = 0;
+
+        // Size is returned in KB
+        $avgRepoSize = 0;
+
+        foreach ($publicRepos as $repo) {
+            if ($forkFilter) {
+                $totalRepoCount++;
+                $stargazerCount += $repo['stargazers_count'];
+                $forkCount += $repo['forks'];
+                $avgRepoSize += $repo['size'];
+            } else if (!$repo['fork']) {
+                $totalRepoCount++;
+                $stargazerCount += $repo['stargazers_count'];
+                $forkCount += $repo['forks'];
+                $avgRepoSize += $repo['size'];
+            }
+
+        }
+
+        $avgRepoSize = $avgRepoSize / $totalRepoCount;
+
+        return \response()->json([
+            'status' => 'success',
+            'totalRepoCount' => $totalRepoCount,
+            'stargazerCount' => $stargazerCount,
+            'forkCount' => $forkCount,
+            'avgRepoSize' => $avgRepoSize,
+        ]);
     }
 }

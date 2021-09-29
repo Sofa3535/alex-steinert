@@ -18,8 +18,18 @@
                 id="lucky-btn"
                 class="btn"
                 @click="feelingLucky"
-            >I'm Feeling Lucky!</button>
-        </div><br>
+            >I'm Feeling Lucky!</button><br>
+            <input type="checkbox" id="forked" v-model="forked">
+            <label for="forked">Show Forked Repos</label>
+        </div>
+
+        <div class="metrics">
+            <p>Total # of Repos: {{ this.totalRepoCount }}</p>
+            <p>Total # of Stargazers: {{ this.stargazerCount }}</p>
+            <p>Total # of Forks: {{ this.forkCount }}</p>
+            <p>Average Repo size: {{ this.avgRepoSize }} KB</p>
+        </div>
+
     </div>
 </template>
 
@@ -36,6 +46,11 @@ export default {
             emptySearch: false,
             status: '',
             user: '',
+            forked: true,
+            totalRepoCount: 0,
+            stargazerCount: 0,
+            forkCount: 0,
+            avgRepoSize: 0
         }
     },
     methods: {
@@ -46,10 +61,13 @@ export default {
             }
             this.emptySearch = false;
             $('.btn').prop('disabled', true);
-            this.$http.get(this.routes.getUser, { params:  { user: this.userSearch }})
+            this.$http.get(this.routes.getUser, { params:  { user: this.userSearch, forked: this.forked }})
                 .then((response) => {
                     if (response.data.status === 'success') {
-
+                        this.totalRepoCount = response.data.totalRepoCount
+                        this.stargazerCount = response.data.stargazerCount
+                        this.forkCount = response.data.forkCount
+                        this.avgRepoSize = response.data.avgRepoSize
                     }
                     this.status = response.data.status
                 })

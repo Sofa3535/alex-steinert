@@ -1826,6 +1826,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -1838,7 +1848,12 @@ __webpack_require__.r(__webpack_exports__);
       userSearch: '',
       emptySearch: false,
       status: '',
-      user: ''
+      user: '',
+      forked: true,
+      totalRepoCount: 0,
+      stargazerCount: 0,
+      forkCount: 0,
+      avgRepoSize: 0
     };
   },
   methods: {
@@ -1854,10 +1869,16 @@ __webpack_require__.r(__webpack_exports__);
       $('.btn').prop('disabled', true);
       this.$http.get(this.routes.getUser, {
         params: {
-          user: this.userSearch
+          user: this.userSearch,
+          forked: this.forked
         }
       }).then(function (response) {
-        if (response.data.status === 'success') {}
+        if (response.data.status === 'success') {
+          _this.totalRepoCount = response.data.totalRepoCount;
+          _this.stargazerCount = response.data.stargazerCount;
+          _this.forkCount = response.data.forkCount;
+          _this.avgRepoSize = response.data.avgRepoSize;
+        }
 
         _this.status = response.data.status;
       })["catch"](function (e) {
@@ -59032,9 +59053,61 @@ var render = function() {
           on: { click: _vm.feelingLucky }
         },
         [_vm._v("I'm Feeling Lucky!")]
-      )
+      ),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.forked,
+            expression: "forked"
+          }
+        ],
+        attrs: { type: "checkbox", id: "forked" },
+        domProps: {
+          checked: Array.isArray(_vm.forked)
+            ? _vm._i(_vm.forked, null) > -1
+            : _vm.forked
+        },
+        on: {
+          change: function($event) {
+            var $$a = _vm.forked,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false
+            if (Array.isArray($$a)) {
+              var $$v = null,
+                $$i = _vm._i($$a, $$v)
+              if ($$el.checked) {
+                $$i < 0 && (_vm.forked = $$a.concat([$$v]))
+              } else {
+                $$i > -1 &&
+                  (_vm.forked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+              }
+            } else {
+              _vm.forked = $$c
+            }
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "forked" } }, [_vm._v("Show Forked Repos")])
     ]),
-    _c("br")
+    _vm._v(" "),
+    _c("div", { staticClass: "metrics" }, [
+      _c("p", [_vm._v("Total # of Repos: " + _vm._s(this.totalRepoCount))]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Total # of Stargazers: " + _vm._s(this.stargazerCount))
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Total # of Forks: " + _vm._s(this.forkCount))]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("Average Repo size: " + _vm._s(this.avgRepoSize) + " KB")
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
