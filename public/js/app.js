@@ -1788,6 +1788,92 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    routes: {
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      userSearch: '',
+      emptySearch: false,
+      status: '',
+      user: ''
+    };
+  },
+  methods: {
+    searchUser: function searchUser() {
+      var _this = this;
+
+      if (!this.userSearch) {
+        this.userSearch = true;
+        return;
+      }
+
+      this.emptySearch = false;
+      $('.btn').prop('disabled', true);
+      this.$http.get(this.routes.getUser, {
+        params: {
+          user: this.userSearch
+        }
+      }).then(function (response) {
+        if (response.data.status === 'success') {}
+
+        _this.status = response.data.status;
+      })["catch"](function (e) {
+        _this.status = 'error';
+      })["finally"](function () {
+        $('.btn').prop('disabled', false);
+        _this.user = _this.userSearch;
+      });
+    },
+    feelingLucky: function feelingLucky() {}
+  },
+  computed: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=script&lang=js& ***!
@@ -1989,14 +2075,18 @@ Vue.use(vue_resource__WEBPACK_IMPORTED_MODULE_0__["default"]);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('movie-finder-app', __webpack_require__(/*! ./Vue/MovieFinder/MovieFinderApp.vue */ "./resources/js/Vue/MovieFinder/MovieFinderApp.vue")["default"]);
+Vue.component('github-finder-app', __webpack_require__(/*! ./Vue/GithubFinder/GithubFinderApp.vue */ "./resources/js/Vue/GithubFinder/GithubFinderApp.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+new Vue({
   el: '#movie-finder-app'
+});
+new Vue({
+  el: '#github-finder-app'
 });
 
 /***/ }),
@@ -58724,6 +58814,45 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./resources/js/Vue/GithubFinder/GithubFinderApp.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/Vue/GithubFinder/GithubFinderApp.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GithubFinderApp_vue_vue_type_template_id_48af4a59___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GithubFinderApp.vue?vue&type=template&id=48af4a59& */ "./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=template&id=48af4a59&");
+/* harmony import */ var _GithubFinderApp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GithubFinderApp.vue?vue&type=script&lang=js& */ "./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _GithubFinderApp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GithubFinderApp_vue_vue_type_template_id_48af4a59___WEBPACK_IMPORTED_MODULE_0__.render,
+  _GithubFinderApp_vue_vue_type_template_id_48af4a59___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Vue/GithubFinder/GithubFinderApp.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Vue/MovieFinder/MovieFinderApp.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/Vue/MovieFinder/MovieFinderApp.vue ***!
@@ -58765,6 +58894,22 @@ component.options.__file = "resources/js/Vue/MovieFinder/MovieFinderApp.vue"
 
 /***/ }),
 
+/***/ "./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GithubFinderApp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GithubFinderApp.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GithubFinderApp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=script&lang=js& ***!
@@ -58794,6 +58939,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=template&id=48af4a59&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=template&id=48af4a59& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GithubFinderApp_vue_vue_type_template_id_48af4a59___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GithubFinderApp_vue_vue_type_template_id_48af4a59___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GithubFinderApp_vue_vue_type_template_id_48af4a59___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GithubFinderApp.vue?vue&type=template&id=48af4a59& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=template&id=48af4a59&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=template&id=aadaf6ea&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=template&id=aadaf6ea& ***!
@@ -58807,6 +58969,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieFinderApp_vue_vue_type_template_id_aadaf6ea___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieFinderApp_vue_vue_type_template_id_aadaf6ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MovieFinderApp.vue?vue&type=template&id=aadaf6ea& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/MovieFinder/MovieFinderApp.vue?vue&type=template&id=aadaf6ea&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=template&id=48af4a59&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/Vue/GithubFinder/GithubFinderApp.vue?vue&type=template&id=48af4a59& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _vm._v("\n    Search for a GitHub User!\n\n    "),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "search-bar" } }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.userSearch,
+            expression: "userSearch"
+          }
+        ],
+        attrs: { id: "search", type: "text" },
+        domProps: { value: _vm.userSearch },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.userSearch = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: { id: "search-btn" },
+          on: { click: _vm.searchUser }
+        },
+        [_vm._v("Search!")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn",
+          attrs: { id: "lucky-btn" },
+          on: { click: _vm.feelingLucky }
+        },
+        [_vm._v("I'm Feeling Lucky!")]
+      )
+    ]),
+    _c("br")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
 
 
 /***/ }),

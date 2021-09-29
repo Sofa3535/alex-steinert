@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gurus\ProjectsGuru;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,6 +13,12 @@ use Illuminate\Support\Facades\Request;
 class ProjectsController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    private $guru;
+
+    public function __construct() {
+        $this->guru = new ProjectsGuru();
+    }
 
     public function index()
     {
@@ -29,6 +36,18 @@ class ProjectsController extends BaseController
             'routes' => $routes
         ]);
 
+    }
+
+    public function gitHub()
+    {
+        $routes = [
+            'getUser' => route('projects.github.getUserApi', [], false),
+            'feelingLucky' => route('projects.github.getRandomApi', [], false)
+        ];
+
+        return view('projects.github',[
+            'routes' => $routes
+        ]);
     }
 
     public function getMoviesApi()
@@ -49,7 +68,7 @@ class ProjectsController extends BaseController
         // Only need to grab the first result
         $movieSearchResp = $movieSearchResp[0];
 
-        [$movieDetails, $castSearchResp] = $this->getMovieDetailsApi($movieSearchResp['id']);
+        [$movieDetails, $castSearchResp] = $this->guru->getMovieDetailsApi($movieSearchResp['id']);
 
         return \response()->json([
             'status' => 'success',
@@ -72,7 +91,7 @@ class ProjectsController extends BaseController
         // we need to try again with a new int
         do {
             $randomInt = rand(1, $latestId);
-            [$movieDetails, $castSearchResp] = $this->getMovieDetailsApi($randomInt);
+            [$movieDetails, $castSearchResp] = $this->guru->getMovieDetailsApi($randomInt);
         } while ((isset($movieDetails['success']) && !$movieDetails['success']) || $movieDetails['adult']);
 
         return \response()->json([
@@ -82,18 +101,8 @@ class ProjectsController extends BaseController
         ]);
     }
 
-    public function getMovieDetailsApi($movieId)
+    public function getUserApi()
     {
-        // Call to grab movie details
-        $movieDetails = \Http::get('https://api.themoviedb.org/3/movie/'.$movieId.'?api_key='
-            .env('MOVIEDB_API_KEY').'&language=en-US')
-            ->json();
 
-        // Call to grab cast & crew
-        $castSearchResp = \Http::get('https://api.themoviedb.org/3/movie/'.$movieId.'/credits?api_key='
-            .env('MOVIEDB_API_KEY').'&language=en-US')
-            ->json();
-
-        return [$movieDetails, $castSearchResp];
     }
 }
