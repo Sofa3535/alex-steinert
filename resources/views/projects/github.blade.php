@@ -2,6 +2,7 @@
 <div id="github-finder-app">
     <github-finder-app
         :routes='{!! json_encode($routes) !!}'
+        :access-token='{!! json_encode($accessToken) !!}'
     ></github-finder-app>
 </div>
 

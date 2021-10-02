@@ -1799,8 +1799,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1836,10 +1834,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     routes: {
+      required: true
+    },
+    accessToken: {
       required: true
     }
   },
@@ -1853,7 +1866,8 @@ __webpack_require__.r(__webpack_exports__);
       totalRepoCount: 0,
       stargazerCount: 0,
       forkCount: 0,
-      avgRepoSize: 0
+      avgRepoSize: 0,
+      languages: []
     };
   },
   methods: {
@@ -1878,6 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.stargazerCount = response.data.stargazerCount;
           _this.forkCount = response.data.forkCount;
           _this.avgRepoSize = response.data.avgRepoSize;
+          _this.languages = response.data.languages;
         }
 
         _this.status = response.data.status;
@@ -1889,8 +1904,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     feelingLucky: function feelingLucky() {}
-  },
-  computed: {}
+  }
 });
 
 /***/ }),
@@ -59011,103 +59025,146 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._v("\n    Search for a GitHub User!\n\n    "),
-    _vm._v(" "),
-    _c("div", { attrs: { id: "search-bar" } }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.userSearch,
-            expression: "userSearch"
-          }
-        ],
-        attrs: { id: "search", type: "text" },
-        domProps: { value: _vm.userSearch },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.userSearch = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: { id: "search-btn" },
-          on: { click: _vm.searchUser }
-        },
-        [_vm._v("Search!")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn",
-          attrs: { id: "lucky-btn" },
-          on: { click: _vm.feelingLucky }
-        },
-        [_vm._v("I'm Feeling Lucky!")]
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.forked,
-            expression: "forked"
-          }
-        ],
-        attrs: { type: "checkbox", id: "forked" },
-        domProps: {
-          checked: Array.isArray(_vm.forked)
-            ? _vm._i(_vm.forked, null) > -1
-            : _vm.forked
-        },
-        on: {
-          change: function($event) {
-            var $$a = _vm.forked,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v)
-              if ($$el.checked) {
-                $$i < 0 && (_vm.forked = $$a.concat([$$v]))
-              } else {
-                $$i > -1 &&
-                  (_vm.forked = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+    !_vm.accessToken
+      ? _c("div", { attrs: { id: "github-auth" } }, [
+          _c("p", [
+            _vm._v(
+              "You must authenticate with GitHub before you use this application"
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary",
+              attrs: {
+                href:
+                  "https://github.com/login/oauth/authorize?client_id=1ead0ff6b3ec2fe3924a"
               }
-            } else {
-              _vm.forked = $$c
-            }
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "forked" } }, [_vm._v("Show Forked Repos")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "metrics" }, [
-      _c("p", [_vm._v("Total # of Repos: " + _vm._s(this.totalRepoCount))]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("Total # of Stargazers: " + _vm._s(this.stargazerCount))
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Total # of Forks: " + _vm._s(this.forkCount))]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v("Average Repo size: " + _vm._s(this.avgRepoSize) + " KB")
-      ])
-    ])
+            },
+            [_vm._v("Authorize with GitHub")]
+          )
+        ])
+      : _c("div", { attrs: { id: "github-search" } }, [
+          _vm._v("\n        Search for a GitHub User!\n\n        "),
+          _vm._v(" "),
+          _c("div", { attrs: { id: "search-bar" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.userSearch,
+                  expression: "userSearch"
+                }
+              ],
+              attrs: { id: "search", type: "text" },
+              domProps: { value: _vm.userSearch },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.userSearch = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn",
+                attrs: { id: "search-btn" },
+                on: { click: _vm.searchUser }
+              },
+              [_vm._v("Search!")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn",
+                attrs: { id: "lucky-btn" },
+                on: { click: _vm.feelingLucky }
+              },
+              [_vm._v("I'm Feeling Lucky!")]
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.forked,
+                  expression: "forked"
+                }
+              ],
+              attrs: { type: "checkbox", id: "forked" },
+              domProps: {
+                checked: Array.isArray(_vm.forked)
+                  ? _vm._i(_vm.forked, null) > -1
+                  : _vm.forked
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.forked,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.forked = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.forked = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.forked = $$c
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "forked" } }, [
+              _vm._v("Show Forked Repos")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "metrics" }, [
+            _c("p", [
+              _vm._v("Total # of Repos: " + _vm._s(this.totalRepoCount))
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v("Total # of Stargazers: " + _vm._s(this.stargazerCount))
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Total # of Forks: " + _vm._s(this.forkCount))]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v("Average Repo size: " + _vm._s(this.avgRepoSize) + " KB")
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _vm._v("Languages Used:\n                "),
+              _c(
+                "ol",
+                _vm._l(_vm.languages, function(count, language) {
+                  return _c("li", [
+                    _vm._v(
+                      _vm._s(language) + " - " + _vm._s(count.toLocaleString())
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
+          ])
+        ])
   ])
 }
 var staticRenderFns = []

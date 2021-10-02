@@ -45,8 +45,18 @@ class ProjectsController extends BaseController
             'feelingLucky' => route('projects.github.getRandomApi', [], false)
         ];
 
+        // Check to see if an access_token is stored in the session
+        $accessToken = session('my_access_token');
+
+        if ($accessToken) {
+            $accessToken = true;
+        } else {
+            $accessToken = false;
+        }
+
         return view('projects.github',[
-            'routes' => $routes
+            'routes' => $routes,
+            'accessToken' => $accessToken
         ]);
     }
 
@@ -101,38 +111,67 @@ class ProjectsController extends BaseController
         ]);
     }
 
+    public function loginGithub()
+    {
+        $code = \Request::get('code');
+        $postParams = ['client_id' => env('GITHUB_CLIENT_ID'), 'client_secret' => env('GITHUB_CLIENT_SECRET'), 'code' => $code];
+        $URL = 'https://github.com/login/oauth/access_token';
+
+        // Doing this the laravel-y way seems to not like the github code we pass in, so let's do some good ol' fashioned PHP
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postParams);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Acccept: application/json'));
+        $accessToken = curl_exec($ch);
+        curl_close($ch);
+
+        //\Session::set('my_access_token', $accessToken);
+        session(['my_access_token' => $accessToken]);
+
+        return redirect(route('projects.github'));
+    }
+
     public function getUserApi()
     {
         $user = \Request::get('user');
         $forkFilter = \Request::get('forked') === 'true' ? true : false;
+        $accessToken = explode('=', explode('&',session('my_access_token'))[0])[1];
 
-        $githubUser = \Http::get('https://api.github.com/users/' . $user)
-            ->json();
-        $publicRepos = \Http::get('https://api.github.com/users/' . $user .'/repos')
+        // Get the all of the user's public repos
+        $publicRepos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+            ->get('https://api.github.com/users/' . $user .'/repos')
             ->json();
 
         $totalRepoCount = 0;
         $stargazerCount = 0;
         $forkCount = 0;
+        $languagesApi = [];
 
         // Size is returned in KB
         $avgRepoSize = 0;
 
         foreach ($publicRepos as $repo) {
-            if ($forkFilter) {
+            if ($forkFilter || !$repo['fork']) {
                 $totalRepoCount++;
                 $stargazerCount += $repo['stargazers_count'];
                 $forkCount += $repo['forks'];
                 $avgRepoSize += $repo['size'];
-            } else if (!$repo['fork']) {
-                $totalRepoCount++;
-                $stargazerCount += $repo['stargazers_count'];
-                $forkCount += $repo['forks'];
-                $avgRepoSize += $repo['size'];
+                $languagesApi[] = $repo['languages_url'];
             }
-
         }
 
+        $returnedRepo = [];
+        // Now we have to use an API to get each individual repo's languages
+        // GraphQL would be SO much more efficient here, but it doesn't return counts
+        foreach ($languagesApi as $api) {
+            $returnedRepo[] = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+                ->get($api)
+                ->json();
+        }
+
+        $languages = $this->guru->mergeGithubLanguages($returnedRepo);
         $avgRepoSize = $avgRepoSize / $totalRepoCount;
 
         return \response()->json([
@@ -141,6 +180,7 @@ class ProjectsController extends BaseController
             'stargazerCount' => $stargazerCount,
             'forkCount' => $forkCount,
             'avgRepoSize' => $avgRepoSize,
+            'languages' => $languages
         ]);
     }
 }

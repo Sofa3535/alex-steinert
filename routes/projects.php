@@ -24,10 +24,16 @@ Route::group(['middleware' => 'web', 'prefix' => 'projects'], function () {
         'uses' => ProjectsController::class.'@feelingLuckyApi', /** see ProjectsController::feelingLuckyApi() */
     ]);
 
+    Route::get('github/login', [
+        'as' => 'projects.github.login',
+        'uses' => ProjectsController::class.'@loginGithub', /** see ProjectsController::loginGithub() */
+    ]);
+
     Route::get('github/getUserApi', [
         'as' => 'projects.github.getUserApi',
         'uses' => ProjectsController::class.'@getUserApi', /** see ProjectsController::getUserApi() */
     ]);
+
 
     Route::get('github/getRandomApi', [
         'as' => 'projects.github.getRandomApi',

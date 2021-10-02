@@ -24,9 +24,12 @@
   <component name="ChangeListManager">
     <list default="true" id="172c9a0d-0dbe-4918-8b5b-7e45b256bce4" name="Default Changelist" comment="Get 3 index pages set up as well as screw with getting webpack setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Gurus/ProjectsGuru.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Gurus/ProjectsGuru.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Vue/GithubFinder/GithubFinderApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Vue/GithubFinder/GithubFinderApp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/projects/github.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/projects/github.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/projects.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/projects.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="PhpDebugGeneral" xdebug_debug_port="9005" listening_started="true" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false">
+  <component name="PhpDebugGeneral" xdebug_debug_port="9005" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false">
     <xdebug_debug_ports port="9005" />
   </component>
   <component name="PhpServers">
@@ -80,12 +83,22 @@
           <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
         </path_mappings>
       </server>
-      <server host="" id="d509e2f8-f9c0-451c-8d2f-84c4518b6aa2" use_path_mappings="true">
+      <server id="d509e2f8-f9c0-451c-8d2f-84c4518b6aa2" use_path_mappings="true">
         <path_mappings>
           <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
         </path_mappings>
       </server>
       <server host="legume.test" id="1de1b0d4-9918-483a-8b25-9461caa09830" name="legume.test" port="443" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
+        </path_mappings>
+      </server>
+      <server id="97dd1e97-9120-4cd1-9a91-f3098b307190" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
+        </path_mappings>
+      </server>
+      <server host="" id="a9895356-1ebe-4a8c-9d9d-c8526d09a126" use_path_mappings="true">
         <path_mappings>
           <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
         </path_mappings>
@@ -214,6 +227,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Constants" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -275,7 +289,10 @@
       <workItem from="1632511462001" duration="1666000" />
       <workItem from="1632518673559" duration="14014000" />
       <workItem from="1632845165156" duration="1634000" />
-      <workItem from="1632875408245" duration="7274000" />
+      <workItem from="1632875408245" duration="7479000" />
+      <workItem from="1632924139283" duration="208000" />
+      <workItem from="1632956317986" duration="3212000" />
+      <workItem from="1633186716391" duration="12108000" />
     </task>
     <task id="LOCAL-00001" summary="Get laravel setup">
       <created>1602922320857</created>
