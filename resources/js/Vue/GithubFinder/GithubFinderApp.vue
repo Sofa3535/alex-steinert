@@ -30,11 +30,26 @@
                 <label for="forked">Show Forked Repos</label>
             </div>
 
-            <div class="metrics">
+            <!--Handle nothing in search box-->
+            <div id="no-search" v-if="emptySearch">
+                <p class="alert alert-danger">Cannot leave search empty!</p>
+            </div>
+
+            <!--Handle unexpected errors-->
+            <div id="error" v-else-if="this.status === 'error'">
+                <p class="alert alert-danger">There was an error. Try again or wait.</p>
+            </div>
+
+            <!--Handle no results-->
+            <div id="no-results" v-else-if="this.status === 'no-results'">
+                <p class="alert alert-invo">No results found for  <strong>{{ this.user }}</strong>. Try checking your spelling.</p>
+            </div>
+
+            <div class="metrics" v-if="this.status === 'success'">
                 <p>Total # of Repos: {{ this.totalRepoCount }}</p>
                 <p>Total # of Stargazers: {{ this.stargazerCount }}</p>
                 <p>Total # of Forks: {{ this.forkCount }}</p>
-                <p>Average Repo size: {{ this.avgRepoSize }} KB</p>
+                <p>Average Repo size: {{ this.formatSize }}</p>
                 <div>Languages Used:
                     <ol>
                        <li v-for="(count, language) in languages">{{ language }} - {{ count.toLocaleString() }}</li>
@@ -70,7 +85,7 @@ export default {
     methods: {
         searchUser() {
             if (!this.userSearch) {
-                this.userSearch = true;
+                this.emptySearch = true;
                 return;
             }
             this.emptySearch = false;
@@ -95,7 +110,37 @@ export default {
                 })
         },
         feelingLucky() {
-
+            this.emptySearch = false;
+            $('.btn').prop('disabled', true);
+            this.$http.get(this.routes.feelingLucky, { params:  {forked: this.forked }})
+                .then((response) => {
+                    if (response.data.status === 'success') {
+                        this.totalRepoCount = response.data.totalRepoCount
+                        this.stargazerCount = response.data.stargazerCount
+                        this.forkCount = response.data.forkCount
+                        this.avgRepoSize = response.data.avgRepoSize
+                        this.languages = response.data.languages
+                    }
+                    this.status = response.data.status
+                })
+                .catch(e =>  {
+                    this.status = 'error';
+                })
+                .finally(() => {
+                    $('.btn').prop('disabled', false);
+                    this.user = this.userSearch
+                })
+        }
+    },
+    computed: {
+        formatSize() {
+            if (this.avgRepoSize <= 999) {
+                return (Math.round(this.avgRepoSize * 100) / 100) + ' KB'
+            } else if (this.avgRepoSize >= 1000 && this.avgRepoSize <= 999999) {
+                return (Math.round((this.avgRepoSize/1000) * 100) / 100) + ' MB'
+            } else {
+                return (Math.round((this.avgRepoSize/1000000) * 100) / 100) + ' GB'
+            }
         }
     }
 }

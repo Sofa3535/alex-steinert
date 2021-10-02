@@ -24,12 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="172c9a0d-0dbe-4918-8b5b-7e45b256bce4" name="Default Changelist" comment="Get 3 index pages set up as well as screw with getting webpack setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Gurus/ProjectsGuru.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Gurus/ProjectsGuru.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Vue/GithubFinder/GithubFinderApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Vue/GithubFinder/GithubFinderApp.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/projects/github.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/projects/github.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/projects.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/projects.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +59,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="PhpDebugGeneral" xdebug_debug_port="9005" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false">
+  <component name="PhpDebugGeneral" xdebug_debug_port="9005" listening_started="true" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false">
     <xdebug_debug_ports port="9005" />
   </component>
   <component name="PhpServers">
@@ -292,7 +289,7 @@
       <workItem from="1632875408245" duration="7479000" />
       <workItem from="1632924139283" duration="208000" />
       <workItem from="1632956317986" duration="3212000" />
-      <workItem from="1633186716391" duration="12108000" />
+      <workItem from="1633186716391" duration="15063000" />
     </task>
     <task id="LOCAL-00001" summary="Get laravel setup">
       <created>1602922320857</created>
@@ -362,5 +359,16 @@
     <MESSAGE value="remove vendor files from .gitignore" />
     <MESSAGE value="Add vendor files to repo" />
     <option name="LAST_COMMIT_MESSAGE" value="Add vendor files to repo" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php</url>
+          <line>194</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

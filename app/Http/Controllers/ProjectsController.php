@@ -133,9 +133,9 @@ class ProjectsController extends BaseController
         return redirect(route('projects.github'));
     }
 
-    public function getUserApi()
+    public function getUserApi($user = null)
     {
-        $user = \Request::get('user');
+        $user = $user ?? \Request::get('user');
         $forkFilter = \Request::get('forked') === 'true' ? true : false;
         $accessToken = explode('=', explode('&',session('my_access_token'))[0])[1];
 
@@ -143,6 +143,12 @@ class ProjectsController extends BaseController
         $publicRepos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
             ->get('https://api.github.com/users/' . $user .'/repos')
             ->json();
+
+        if (isset($publicRepos['message']) && $publicRepos['message'] === 'Not Found') {
+            return \response()->json([
+                'status' => 'no-results',
+            ]);
+        }
 
         $totalRepoCount = 0;
         $stargazerCount = 0;
@@ -174,7 +180,7 @@ class ProjectsController extends BaseController
         $languages = $this->guru->mergeGithubLanguages($returnedRepo);
         $avgRepoSize = $avgRepoSize / $totalRepoCount;
 
-        return \response()->json([
+         return \response()->json([
             'status' => 'success',
             'totalRepoCount' => $totalRepoCount,
             'stargazerCount' => $stargazerCount,
@@ -182,5 +188,11 @@ class ProjectsController extends BaseController
             'avgRepoSize' => $avgRepoSize,
             'languages' => $languages
         ]);
+    }
+
+    public function githubFeelingLuckyApi()
+    {
+        $user = 'Sofa3535';
+        return $this->getUserApi($user);
     }
 }

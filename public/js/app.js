@@ -1847,6 +1847,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     routes: {
@@ -1875,7 +1890,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       if (!this.userSearch) {
-        this.userSearch = true;
+        this.emptySearch = true;
         return;
       }
 
@@ -1903,7 +1918,43 @@ __webpack_require__.r(__webpack_exports__);
         _this.user = _this.userSearch;
       });
     },
-    feelingLucky: function feelingLucky() {}
+    feelingLucky: function feelingLucky() {
+      var _this2 = this;
+
+      this.emptySearch = false;
+      $('.btn').prop('disabled', true);
+      this.$http.get(this.routes.feelingLucky, {
+        params: {
+          forked: this.forked
+        }
+      }).then(function (response) {
+        if (response.data.status === 'success') {
+          _this2.totalRepoCount = response.data.totalRepoCount;
+          _this2.stargazerCount = response.data.stargazerCount;
+          _this2.forkCount = response.data.forkCount;
+          _this2.avgRepoSize = response.data.avgRepoSize;
+          _this2.languages = response.data.languages;
+        }
+
+        _this2.status = response.data.status;
+      })["catch"](function (e) {
+        _this2.status = 'error';
+      })["finally"](function () {
+        $('.btn').prop('disabled', false);
+        _this2.user = _this2.userSearch;
+      });
+    }
+  },
+  computed: {
+    formatSize: function formatSize() {
+      if (this.avgRepoSize <= 999) {
+        return Math.round(this.avgRepoSize * 100) / 100 + ' KB';
+      } else if (this.avgRepoSize >= 1000 && this.avgRepoSize <= 999999) {
+        return Math.round(this.avgRepoSize / 1000 * 100) / 100 + ' MB';
+      } else {
+        return Math.round(this.avgRepoSize / 1000000 * 100) / 100 + ' GB';
+      }
+    }
   }
 });
 
@@ -59134,36 +59185,66 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "metrics" }, [
-            _c("p", [
-              _vm._v("Total # of Repos: " + _vm._s(this.totalRepoCount))
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("Total # of Stargazers: " + _vm._s(this.stargazerCount))
-            ]),
-            _vm._v(" "),
-            _c("p", [_vm._v("Total # of Forks: " + _vm._s(this.forkCount))]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("Average Repo size: " + _vm._s(this.avgRepoSize) + " KB")
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("Languages Used:\n                "),
-              _c(
-                "ol",
-                _vm._l(_vm.languages, function(count, language) {
-                  return _c("li", [
-                    _vm._v(
-                      _vm._s(language) + " - " + _vm._s(count.toLocaleString())
-                    )
-                  ])
-                }),
-                0
-              )
-            ])
-          ])
+          _vm.emptySearch
+            ? _c("div", { attrs: { id: "no-search" } }, [
+                _c("p", { staticClass: "alert alert-danger" }, [
+                  _vm._v("Cannot leave search empty!")
+                ])
+              ])
+            : this.status === "error"
+            ? _c("div", { attrs: { id: "error" } }, [
+                _c("p", { staticClass: "alert alert-danger" }, [
+                  _vm._v("There was an error. Try again or wait.")
+                ])
+              ])
+            : this.status === "no-results"
+            ? _c("div", { attrs: { id: "no-results" } }, [
+                _c("p", { staticClass: "alert alert-invo" }, [
+                  _vm._v("No results found for  "),
+                  _c("strong", [_vm._v(_vm._s(this.user))]),
+                  _vm._v(". Try checking your spelling.")
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          this.status === "success"
+            ? _c("div", { staticClass: "metrics" }, [
+                _c("p", [
+                  _vm._v("Total # of Repos: " + _vm._s(this.totalRepoCount))
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "Total # of Stargazers: " + _vm._s(this.stargazerCount)
+                  )
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Total # of Forks: " + _vm._s(this.forkCount))
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v("Average Repo size: " + _vm._s(this.formatSize))
+                ]),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v("Languages Used:\n                "),
+                  _c(
+                    "ol",
+                    _vm._l(_vm.languages, function(count, language) {
+                      return _c("li", [
+                        _vm._v(
+                          _vm._s(language) +
+                            " - " +
+                            _vm._s(count.toLocaleString())
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            : _vm._e()
         ])
   ])
 }
