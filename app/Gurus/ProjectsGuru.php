@@ -20,12 +20,22 @@ class ProjectsGuru
         return [$movieDetails, $castSearchResp];
     }
 
-    public function mergeGithubLanguages(array $returnedRepo)
+    /**
+     * @param array $returnedRepo
+     * @param $languagesApi
+     * @param $forkFilter
+     * @return array
+     *
+     * Merges and sorts all languages together and filters based on the forked flag
+     */
+    public function mergeGithubLanguages(array $returnedRepo, $languagesApi, $forkFilter)
     {
         $languages = [];
-        foreach ($returnedRepo as $repoLanguages) {
-            foreach ($repoLanguages as $language => $count) {
-                isset($languages[$language]) ? $languages[$language] += $count : $languages[$language] = $count;
+        foreach ($returnedRepo as $api => $repoLanguages) {
+            if ($forkFilter || !$languagesApi[$api]) {
+                foreach ($repoLanguages as $language => $count) {
+                    isset($languages[$language]) ? $languages[$language] += $count : $languages[$language] = $count;
+                }
             }
         }
 

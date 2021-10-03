@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Request;
 
 class ProjectsController extends BaseController
@@ -42,7 +43,6 @@ class ProjectsController extends BaseController
     {
         $routes = [
             'getUser' => route('projects.github.getUserApi', [], false),
-            'feelingLucky' => route('projects.github.getRandomApi', [], false)
         ];
 
         // Check to see if an access_token is stored in the session
@@ -133,66 +133,94 @@ class ProjectsController extends BaseController
         return redirect(route('projects.github'));
     }
 
-    public function getUserApi($user = null)
+    public function getUserApi()
     {
-        $user = $user ?? \Request::get('user');
+        // Grab input data and start redis. User is lowercase so it's only cached once.
+        $redis = Redis::connection();
+        $user = strtolower(\Request::get('user'));
         $forkFilter = \Request::get('forked') === 'true' ? true : false;
         $accessToken = explode('=', explode('&',session('my_access_token'))[0])[1];
 
-        // Get the all of the user's public repos
-        $publicRepos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
-            ->get('https://api.github.com/users/' . $user .'/repos')
-            ->json();
+        // Check to see if the user is cached. If not, use the endpoints and then cache
+        $redisRepos = $redis->get($user);
+        $redisLanguages = $redis->get($user . '-languages');
+        if ($redisRepos) {
+            $userData = json_decode($redisRepos, true);
+            $userAccount = $userData['user'];
+            $repos = $userData['repos'];
+        } else {
+            $userAccount = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+                ->get('https://api.github.com/users/' . $user)
+                ->json();
+            // Get the all of the user's public repos, and private repos if they've authenticated
+            $repos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+                ->get('https://api.github.com/users/' . $user .'/repos')
+                ->json();
+            $userData['user'] = $userAccount;
+            $userData['repos'] = $repos;
+            $redis->set($user, json_encode($userData));
+        }
 
-        if (isset($publicRepos['message']) && $publicRepos['message'] === 'Not Found') {
+        // Return early if the user is not found
+        if (isset($repos['message']) && $repos['message'] === 'Not Found') {
             return \response()->json([
                 'status' => 'no-results',
             ]);
         }
 
+        // Initialize
         $totalRepoCount = 0;
         $stargazerCount = 0;
         $forkCount = 0;
         $languagesApi = [];
+        $displayRepos = [];
 
         // Size is returned in KB
         $avgRepoSize = 0;
 
-        foreach ($publicRepos as $repo) {
+        // Iterate through repo to grab required data
+        foreach ($repos as $repo) {
+            // Only pull in data if the forked filter is true or if the repo has not been forked
             if ($forkFilter || !$repo['fork']) {
                 $totalRepoCount++;
                 $stargazerCount += $repo['stargazers_count'];
                 $forkCount += $repo['forks'];
                 $avgRepoSize += $repo['size'];
-                $languagesApi[] = $repo['languages_url'];
+                $displayRepos[] = $repo;
             }
+            // Grab the language url as the key and the forked attribute as a value so we can
+            // cache all languages and filter depending on if the forked parameter is set
+            $languagesApi[$repo['languages_url']] = $repo['fork'];
         }
 
-        $returnedRepo = [];
-        // Now we have to use an API to get each individual repo's languages
-        // GraphQL would be SO much more efficient here, but it doesn't return counts
-        foreach ($languagesApi as $api) {
-            $returnedRepo[] = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
-                ->get($api)
-                ->json();
+        // Similarly to the beginning, if we are cached, grab, otherwise use endpoint then cache
+        if ($redisLanguages) {
+            $returnedRepo = json_decode($redisLanguages, true);
+        } else {
+            // Now we have to use an API to get each individual repo's languages
+            // GraphQL would be SO much more efficient here, but it doesn't return counts
+            $returnedRepo = [];
+            foreach ($languagesApi as $api => $forked) {
+                $returnedRepo[$api] = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+                    ->get($api)
+                    ->json();
+            }
+            $redis->set($user . '-languages', json_encode($returnedRepo));
         }
 
-        $languages = $this->guru->mergeGithubLanguages($returnedRepo);
+        $languages = $this->guru->mergeGithubLanguages($returnedRepo, $languagesApi, $forkFilter);
         $avgRepoSize = $avgRepoSize / $totalRepoCount;
 
+        // Return with all required data
          return \response()->json([
             'status' => 'success',
             'totalRepoCount' => $totalRepoCount,
             'stargazerCount' => $stargazerCount,
             'forkCount' => $forkCount,
             'avgRepoSize' => $avgRepoSize,
+            'repos' => $displayRepos,
+            'userDetails' => $userAccount,
             'languages' => $languages
         ]);
-    }
-
-    public function githubFeelingLuckyApi()
-    {
-        $user = 'Sofa3535';
-        return $this->getUserApi($user);
     }
 }

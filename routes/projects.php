@@ -34,9 +34,4 @@ Route::group(['middleware' => 'web', 'prefix' => 'projects'], function () {
         'uses' => ProjectsController::class.'@getUserApi', /** see ProjectsController::getUserApi() */
     ]);
 
-
-    Route::get('github/getRandomApi', [
-        'as' => 'projects.github.getRandomApi',
-        'uses' => ProjectsController::class.'@githubFeelingLuckyApi', /** see ProjectsController::githubFeelingLuckyApi() */
-    ]);
 });

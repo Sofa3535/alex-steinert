@@ -20,12 +20,7 @@
                     id="search-btn"
                     class="btn"
                     @click="searchUser"
-                >Search!</button>
-                <button
-                    id="lucky-btn"
-                    class="btn"
-                    @click="feelingLucky"
-                >I'm Feeling Lucky!</button><br>
+                >Search!</button><br>
                 <input type="checkbox" id="forked" v-model="forked">
                 <label for="forked">Show Forked Repos</label>
             </div>
@@ -46,6 +41,10 @@
             </div>
 
             <div class="metrics" v-if="this.status === 'success'">
+                <div id="user-details" class="container" style="text-align: center">
+                    <h4>{{ this.userDetails.name ? this.userDetails.name : this.user }}</h4>
+                    <img class="resize center" :src="this.userDetails.avatar_url">
+                </div>
                 <p>Total # of Repos: {{ this.totalRepoCount }}</p>
                 <p>Total # of Stargazers: {{ this.stargazerCount }}</p>
                 <p>Total # of Forks: {{ this.forkCount }}</p>
@@ -55,6 +54,14 @@
                        <li v-for="(count, language) in languages">{{ language }} - {{ count.toLocaleString() }}</li>
                     </ol>
                 </div>
+
+                <div id="repo-card-container">
+                    <div class="repo-card" v-for="repo in repos">
+                        <a :href="repo.html_url" target="_blank"><h3>{{ repo.name }}</h3></a>
+                        <p>{{ repo.description ? repo.description : 'No Description'}}</p>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -79,7 +86,9 @@ export default {
             stargazerCount: 0,
             forkCount: 0,
             avgRepoSize: 0,
-            languages: []
+            languages: [],
+            userDetails: [],
+            repos: [],
         }
     },
     methods: {
@@ -98,28 +107,8 @@ export default {
                         this.forkCount = response.data.forkCount
                         this.avgRepoSize = response.data.avgRepoSize
                         this.languages = response.data.languages
-                    }
-                    this.status = response.data.status
-                })
-                .catch(e =>  {
-                    this.status = 'error';
-                })
-                .finally(() => {
-                    $('.btn').prop('disabled', false);
-                    this.user = this.userSearch
-                })
-        },
-        feelingLucky() {
-            this.emptySearch = false;
-            $('.btn').prop('disabled', true);
-            this.$http.get(this.routes.feelingLucky, { params:  {forked: this.forked }})
-                .then((response) => {
-                    if (response.data.status === 'success') {
-                        this.totalRepoCount = response.data.totalRepoCount
-                        this.stargazerCount = response.data.stargazerCount
-                        this.forkCount = response.data.forkCount
-                        this.avgRepoSize = response.data.avgRepoSize
-                        this.languages = response.data.languages
+                        this.userDetails = response.data.userDetails
+                        this.repos = response.data.repos
                     }
                     this.status = response.data.status
                 })
@@ -147,5 +136,35 @@ export default {
 </script>
 
 <style>
+
+    #repo-card-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .repo-card {
+        width: 33%;
+        padding: 1%;
+    }
+
+    .resize {
+        width: 300px;
+        height: auto;
+        box-shadow: 10px 5px 5px #CCC;
+        border-radius: 15px;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 300px;
+    }
+
+    #user-details {
+        position: absolute;
+    }
 
 </style>
