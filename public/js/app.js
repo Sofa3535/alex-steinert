@@ -1876,6 +1876,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     accessToken: {
       required: true
+    },
+    clientId: {
+      required: true
     }
   },
   data: function data() {
@@ -59144,7 +59147,8 @@ var render = function() {
               staticClass: "btn btn-primary",
               attrs: {
                 href:
-                  "https://github.com/login/oauth/authorize?client_id=1ead0ff6b3ec2fe3924a"
+                  "https://github.com/login/oauth/authorize?client_id=" +
+                  this.clientId
               }
             },
             [_vm._v("Authorize with GitHub")]

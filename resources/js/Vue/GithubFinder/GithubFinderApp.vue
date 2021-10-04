@@ -3,7 +3,7 @@
 
         <div id="github-auth" v-if="!accessToken">
             <p>You must authenticate with GitHub before you use this application</p>
-            <a href="https://github.com/login/oauth/authorize?client_id=1ead0ff6b3ec2fe3924a" class="btn btn-primary">Authorize with GitHub</a>
+            <a :href="'https://github.com/login/oauth/authorize?client_id=' + this.clientId" class="btn btn-primary">Authorize with GitHub</a>
         </div>
 
         <div id="github-search" v-else>
@@ -74,6 +74,7 @@ export default {
     props: {
         routes: { required: true },
         accessToken: { required: true },
+        clientId: { required: true },
     },
     data() {
         return {

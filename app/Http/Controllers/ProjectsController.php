@@ -56,7 +56,8 @@ class ProjectsController extends BaseController
 
         return view('projects.github',[
             'routes' => $routes,
-            'accessToken' => $accessToken
+            'accessToken' => $accessToken,
+            'clientId' => env('GITHUB_CLIENT_ID')
         ]);
     }
 
