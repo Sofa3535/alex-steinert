@@ -24,9 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="172c9a0d-0dbe-4918-8b5b-7e45b256bce4" name="Default Changelist" comment="Get 3 index pages set up as well as screw with getting webpack setup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Gurus/ProjectsGuru.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Gurus/ProjectsGuru.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Vue/GithubFinder/GithubFinderApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Vue/GithubFinder/GithubFinderApp.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +104,12 @@
           <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
         </path_mappings>
       </server>
-      <server host="" id="3fe5a5f3-1599-43cd-9292-177d11862c16" use_path_mappings="true">
+      <server id="3fe5a5f3-1599-43cd-9292-177d11862c16" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
+        </path_mappings>
+      </server>
+      <server host="" id="6b6dec40-da16-4ea7-bd40-53ab05e36d58" use_path_mappings="true">
         <path_mappings>
           <mapping local-root="$PROJECT_DIR$" remote-root="/Users/alex/vendor/laravel/valet" />
         </path_mappings>
@@ -301,7 +305,8 @@
       <workItem from="1632956317986" duration="3212000" />
       <workItem from="1633186716391" duration="28179000" />
       <workItem from="1633294194182" duration="854000" />
-      <workItem from="1633356757181" duration="2027000" />
+      <workItem from="1633356757181" duration="3355000" />
+      <workItem from="1633397872603" duration="3361000" />
     </task>
     <task id="LOCAL-00001" summary="Get laravel setup">
       <created>1602922320857</created>
@@ -377,13 +382,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php</url>
-          <line>56</line>
-          <option name="timeStamp" value="10" />
+          <line>156</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/ProjectsController.php</url>
-          <line>50</line>
-          <option name="timeStamp" value="11" />
+          <line>150</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -391,6 +396,7 @@
       <configuration name="server.php">
         <watch expression="session('my_access_token')" language="PHP" />
         <watch expression="env('GITHUB_CLIENT_ID')" language="PHP" />
+        <watch expression="session('authed_user')" language="PHP" />
       </configuration>
     </watches-manager>
   </component>

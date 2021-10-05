@@ -115,7 +115,11 @@ class ProjectsController extends BaseController
     public function loginGithub()
     {
         $code = \Request::get('code');
-        $postParams = ['client_id' => env('GITHUB_CLIENT_ID'), 'client_secret' => env('GITHUB_CLIENT_SECRET'), 'code' => $code];
+        $postParams = [
+            'client_id' => env('GITHUB_CLIENT_ID'),
+            'client_secret' => env('GITHUB_CLIENT_SECRET'),
+            'code' => $code
+        ];
         $URL = 'https://github.com/login/oauth/access_token';
 
         // Doing this the laravel-y way seems to not like the github code we pass in, so let's do some good ol' fashioned PHP
@@ -128,8 +132,14 @@ class ProjectsController extends BaseController
         $accessToken = curl_exec($ch);
         curl_close($ch);
 
-        //\Session::set('my_access_token', $accessToken);
+        $accessToken = explode('=', explode('&',$accessToken)[0])[1];
         session(['my_access_token' => $accessToken]);
+
+        $getAuthedUser = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+            ->get('https://api.github.com/user')
+            ->json();
+
+        session(['authed_user' => strtolower($getAuthedUser['login'])]);
 
         return redirect(route('projects.github'));
     }
@@ -140,7 +150,7 @@ class ProjectsController extends BaseController
         $redis = Redis::connection();
         $user = strtolower(\Request::get('user'));
         $forkFilter = \Request::get('forked') === 'true' ? true : false;
-        $accessToken = explode('=', explode('&',session('my_access_token'))[0])[1];
+        $accessToken = session('my_access_token');
 
         // Check to see if the user is cached. If not, use the endpoints and then cache
         $redisRepos = $redis->get($user);
@@ -153,10 +163,19 @@ class ProjectsController extends BaseController
             $userAccount = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
                 ->get('https://api.github.com/users/' . $user)
                 ->json();
-            // Get the all of the user's public repos, and private repos if they've authenticated
-            $repos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
-                ->get('https://api.github.com/users/' . $user .'/repos')
-                ->json();
+
+            // Check to see if the user is the auth user
+            if ($user === session('authed_user')) {
+                // Get all user's repos public and private if authenticated
+                $repos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+                    ->get('https://api.github.com/user/repos')
+                    ->json();
+            } else {
+                // Get the all of the user's public repos
+                $repos = \Http::withHeaders(['Authorization' => 'token ' . $accessToken])
+                    ->get('https://api.github.com/users/' . $user . '/repos')
+                    ->json();
+            }
             $userData['user'] = $userAccount;
             $userData['repos'] = $repos;
             $redis->set($user, json_encode($userData));
